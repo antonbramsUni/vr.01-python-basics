@@ -8,7 +8,7 @@ B = TMatrix(1,3,5,7,9,11,13,15,2,4,6,8,10,12,14,16)
 C = A.mult(B)
 print('1.1 mult', C.value)
 '''
-C = [
+[
 	152, 168, 184, 200, 
 	376, 424, 472, 520, 
 	180, 200, 220, 240, 
@@ -28,7 +28,7 @@ a = a.make_scale_mat(1, 2, 3)
 print('1.2 matrix test', a.value)
 
 '''
-a = [
+[
 	-3.061616997868382e-17, -0.9659258262890682, 0.25881904510252085, 0.0,
 	 1.0605752387249069e-16, 0.5176380902050417, 1.9318516525781364, 0.0, 
 	 -3.0, 1.2989340843532398e-16, 1.29893408435324e-16, 0.0, 
@@ -53,7 +53,7 @@ c = a.mult_vec(Vector4(1,2,3,1))
 print('1.4 mult_vec', c.value)
 
 '''
-c = [
+[
 	-8.0, 
 	2.0693503541210156, 
 	7.1225223502587935, 
@@ -79,10 +79,26 @@ cycle_transform = TMatrix()
 cycle_transform = cycle_transform.make_trans_mat(5, 0, -2)
 cycle_transform = cycle_transform.make_rot_mat(90, 'y')
 print('1.7 cycle_transform', cycle_transform.value)
+'''
+[
+	6.123233995736766e-17, 0.0, 1.0, 0.0, 
+	0, 1, 0, 0, 
+	-1.0, 0.0, 6.123233995736766e-17, 0.0, 
+	5, 0, -2, 1
+]
+'''
 
 body_geom = TMatrix()
 body_geom = body_geom.make_rot_mat(90, 'y')
 print('1.7 body_geom', body_geom.value)
+'''
+[
+	6.123233995736766e-17, 0.0, 1.0, 0.0, 
+	0, 1, 0, 0, 
+	-1.0, 0.0, 6.123233995736766e-17, 0.0, 
+	0, 0, 0, 1
+]
+'''
 
 wheel1_trans = TMatrix()
 wheel1_trans = wheel1_trans.make_trans_mat(-2, -1.5, 1)
@@ -90,6 +106,14 @@ wheel1_trans = wheel1_trans.make_trans_mat(-2, -1.5, 1)
 wheel2_trans = TMatrix()
 wheel2_trans = wheel2_trans.make_trans_mat(2, -1.5, 1)
 print('1.7 wheel2_trans', wheel2_trans.value)
+'''
+[
+	1, 0, 0, 0, 
+	0, 1, 0, 0, 
+	0, 0, 1, 0, 
+	2.0, -1.5, 1.0, 1.0
+]
+'''
 
 wheel1_geom = TMatrix()
 wheel1_geom = wheel1_geom.make_scale_mat(.5, .5, .5)
@@ -97,19 +121,42 @@ wheel1_geom = wheel1_geom.make_scale_mat(.5, .5, .5)
 wheel2_geom = TMatrix()
 wheel2_geom = wheel2_geom.make_scale_mat(.5, .5, .5)
 print('1.7 wheel2_geom', wheel2_geom.value)
+'''
+[
+	0.5, 0.0, 0.0, 0.0, 
+	0.0, 0.5, 0.0, 0.0, 
+	0.0, 0.0, 0.5, 0.0, 
+	0, 0, 0, 1
+]
+'''
 
 # Global Matrix
 cycle_transform_WT = TMatrix()
 cycle_transform_WT = cycle_transform_WT.mult(root)
 cycle_transform_WT = cycle_transform_WT.mult(cycle_transform)
 print('1.7 cycle_transform_WT', cycle_transform_WT.value)
+'''
+[
+	6.123233995736766e-17, 0.0, 1.0, 0.0, 
+	0, 1, 0, 0, 
+	-1.0, 0.0, 6.123233995736766e-17, 0.0, 
+	5, 0, -2, 1
+]
+'''
 
 body_geom_WT = TMatrix()
 body_geom_WT = body_geom_WT.mult(root)
 body_geom_WT = body_geom_WT.mult(cycle_transform)
 body_geom_WT = body_geom_WT.mult(body_geom)
 print('1.7 body_geom_WT', body_geom_WT.value)
-
+'''
+[
+	-1.0, 0.0, 1.2246467991473532e-16, 0.0, 
+	0.0, 1.0, 0.0, 0.0, 
+	-1.2246467991473532e-16, 0.0, -1.0, 0.0, 
+	5.0, 0.0, -2.0, 1.0
+]
+'''
 wheel1_trans_WT = TMatrix()
 wheel1_trans_WT = wheel1_trans_WT.mult(root)
 wheel1_trans_WT = wheel1_trans_WT.mult(cycle_transform)
@@ -120,6 +167,14 @@ wheel2_trans_WT = wheel2_trans_WT.mult(root)
 wheel2_trans_WT = wheel2_trans_WT.mult(cycle_transform)
 wheel2_trans_WT = wheel2_trans_WT.mult(wheel2_trans)
 print('1.7 wheel2_trans_WT', wheel2_trans_WT.value)
+'''
+[
+	6.123233995736766e-17, 0.0, 1.0, 0.0, 
+	0.0, 1.0, 0.0, 0.0, 
+	-1.0, 0.0, 6.123233995736766e-17, 0.0, 
+	4.0, -1.5, 0.0, 1.0
+]
+'''
 
 wheel1_geom_WT = TMatrix()
 wheel1_geom_WT = wheel1_geom_WT.mult(root)
@@ -133,6 +188,14 @@ wheel2_geom_WT = wheel2_geom_WT.mult(cycle_transform)
 wheel2_geom_WT = wheel2_geom_WT.mult(wheel2_trans)
 wheel2_geom_WT = wheel2_geom_WT.mult(wheel2_geom)
 print('1.7 wheel2_geom_WT', wheel2_geom_WT.value)
+'''
+[
+	3.061616997868383e-17, 0.0, 0.5, 0.0, 
+	0.0, 0.5, 0.0, 0.0, 
+	-0.5, 0.0, 3.061616997868383e-17, 0.0, 
+	4.0, -1.5, 0.0, 1.0
+]
+'''
 
 # 1.8
 '''
